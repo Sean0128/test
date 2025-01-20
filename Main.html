@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>JS Final</title>
+  
+  <!-- CSS  -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />	 
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/Additional.css" rel="stylesheet" type="text/css">
+
+  <!--Built Scripts-->
+  
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>  
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  
+  <!--Additional Scripts-->
+
+  <script>
+
+    // https://developers.google.com/chart/interactive/docs/quick_start
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.	
+    google.charts.setOnLoadCallback(init);
+
+    function init() {
+        // 這個例子使用的試算表是 https://docs.google.com/spreadsheets/d/1QScI5d56Kh-LGywY4WR6EvRGPcalFQYUAdqMxbFVDvk/copy
+        // 將上述試算表另存副本後，你要在自己的雲端硬碟將該試算表設定成[知道連結的使用者都能查看]。
+        // 然後讓程式讀取 https://docs.google.com/spreadsheets/d/瀏覽器網址列上的網址擷取序號部分/gviz/tq?sheet=工作表名稱
+        // 也就是將下列的 1QScI5d56Kh-LGywY4WR6EvRGPcalFQYUAdqMxbFVDvk 更換成自己的檔案序號，以及最後部分指讀取哪個工作表。
+        var url =
+        'https://docs.google.com/spreadsheets/d/19iLM_6GC-IIgSQbDHS3E8rWMhrTmfLGcFaWOu-MuQlc/gviz/tq?sheet=SETS';
+        var query = new google.visualization.Query(url);
+        query.setQuery('select *');
+        query.send(processSheetsData);
+    }	
+
+    function processSheetsData(response) {
+      var data = response.getDataTable();
+      var columns = data.getNumberOfColumns();
+      var rows = data.getNumberOfRows();
+      var s = '' 
+      
+      s += `  <div class="container">
+                <div class="section" style="padding:0px">
+                  <br>
+                  <div class="row" style="margin:0px">
+                    <div class="col s12 m4">
+                      <div class="card">
+                        <div class="card-image waves-effect waves-block waves-light">
+                      <img class="activator" src="pictures\Black.png">
+                    </div>
+                  <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>`
+
+      for (r = 0; r <= rows; r++){
+        s = s + `<p>${data.getFormattedValue(r,0)} ${data.getFormattedValue(r,1)} ${data.getFormattedValue(r,2)}</p>`
+        document.getElementById('id').innerHTML = s;
+      }
+                        
+      s +=`           </div>
+                    </div>
+                  </div> 
+                </div>
+              </div>
+            </div>`
+
+
+    }
+  
+  </script>
+
+</head>
+
+<body style="background-color: olive;">
+
+  <!--Navigation and Side Navbars--> 
+  <div style="position: sticky; top: 0px; z-index: 9999;">
+    <nav class="black" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="Main.html" class="brand-logo" style="font-family:'Papyrus'; font-weight:bold; color:white; font-size:large">
+          樹林活力堡早餐店
+        </a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="B.html" style="color:white; font-family:'Papyrus'; font-weight:bold">漢堡</a></li>
+          <li><a href="S.html" style="color:white; font-family:'Papyrus'; font-weight:bold">三明治</a></li>
+          <li><a href="CF.html" style="color:white; font-family:'Papyrus'; font-weight:bold">乳酪餅</a></li>
+          <li><a href="CO.html" style="color:white; font-family:'Papyrus'; font-weight:bold">蛋餅</a></li>
+          <li><a href="ST.html" style="color:white; font-family:'Papyrus'; font-weight:bold">抹醬麵包</a></li>
+          <li><a href="HPN.html" style="color:white; font-family:'Papyrus'; font-weight:bold">鐵板麵&單品</a></li>
+          <li><a href="D.html" style="color:white; font-family:'Papyrus'; font-weight:bold">飲料</a></li>
+        </ul>
+  
+        <ul id="nav-mobile" class="sidenav" style="background-color: black;">
+          <li><a href="B.html" style="color:white; font-family:'Papyrus'; font-weight:bold">漢堡</a></li>
+          <li><a href="S.html" style="color:white; font-family:'Papyrus'; font-weight:bold">三明治</a></li>
+          <li><a href="CF.html" style="color:white; font-family:'Papyrus'; font-weight:bold">乳酪餅</a></li>
+          <li><a href="CO.html" style="color:white; font-family:'Papyrus'; font-weight:bold">蛋餅</a></li>
+          <li><a href="ST.html" style="color:white; font-family:'Papyrus'; font-weight:bold">抹醬麵包</a></li>
+          <li><a href="HPN.html" style="color:white; font-family:'Papyrus'; font-weight:bold">鐵板麵&單品</a></li>
+          <li><a href="D.html" style="color:white; font-family:'Papyrus'; font-weight:bold">飲料</a></li>
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons" style="color:whitesmoke">menu</i></a>
+      </div>
+    </nav>
+  </div>
+  <!--End of Navigations-->
+
+  <!--Content 1-->
+  <div class="container">
+    <div class="section" style="padding:0px">
+      <br>
+      <div class="row" style="margin:0px">
+
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                  <img class="activator" src="pictures\Black.png">
+                </div> 
+                <div class="col s12 m6" style="background-color: antiquewhite;">                
+                  <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">Card Title</span>
+                  </div>
+                </div>
+
+                <div class="col s12 m6" style="background-color: aliceblue;">                
+                  <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">Card Title</span>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  
+
+
+
+
+  <div id="id"></div>
+
+  <!--JavaScript at end of body for optimized loading-->
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+</body>
+</html>
